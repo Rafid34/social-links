@@ -1,122 +1,168 @@
-// ===== SMOOTH SCROLL ANIMATION =====
-document.addEventListener('DOMContentLoaded', () => {
-    // Add smooth entrance animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }, index * 100);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // Observe all link cards
-    document.querySelectorAll('.link-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
-    });
-
-    // ===== CLICK ANALYTICS (Optional) =====
-    document.querySelectorAll('.link-card').forEach(card => {
-        card.addEventListener('click', (e) => {
-            const linkTitle = card.querySelector('.link-title').textContent;
-            console.log(`Clicked: ${linkTitle}`);
-            
-            // Add ripple effect
-            const ripple = document.createElement('span');
-            ripple.classList.add('ripple');
-            
-            const rect = card.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-            
-            ripple.style.width = ripple.style.height = size + 'px';
-            ripple.style.left = x + 'px';
-            ripple.style.top = y + 'px';
-            
-            card.appendChild(ripple);
-            
-            setTimeout(() => ripple.remove(), 600);
-        });
-    });
-
-    // ===== PROFILE IMAGE ERROR HANDLING =====
-    const profileImage = document.querySelector('.profile-image');
-    if (profileImage) {
-        profileImage.addEventListener('error', () => {
-            profileImage.src = 'https://ui-avatars.com/api/?name=Ahnaf+Rafid&size=200&background=6366f1&color=fff&bold=true';
-        });
-    }
-
-    // ===== DYNAMIC GREETING =====
-    const hour = new Date().getHours();
-    let greeting = 'Hello';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ahnaf Aqif Bhuiyan Rafid - Connect with me on social media">
+    <meta name="keywords" content="Ahnaf Aqif Bhuiyan Rafid, social links, portfolio, developer">
+    <meta name="author" content="Ahnaf Aqif Bhuiyan Rafid">
     
-    if (hour < 12) greeting = 'Good Morning';
-    else if (hour < 18) greeting = 'Good Afternoon';
-    else greeting = 'Good Evening';
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ahnaf Aqif Bhuiyan Rafid - Social Links">
+    <meta property="og:description" content="Connect with me on social media">
     
-    console.log(`${greeting}! Welcome to my social links page.`);
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Ahnaf Aqif Bhuiyan Rafid - Social Links">
+    
+    <title>Ahnaf Aqif Bhuiyan Rafid - Social Links</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://github.com/Rafid34.png" type="image/png">
+</head>
+<body>
+    <div class="container">
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="profile-image-wrapper">
+                <img src="https://github.com/Rafid34.png" alt="Ahnaf Aqif Bhuiyan Rafid" class="profile-image">
+                <div class="status-indicator"></div>
+            </div>
+            <h1 class="profile-name">Ahnaf Aqif Bhuiyan Rafid</h1>
+            <p class="profile-title">Developer | Creator | Innovator</p>
+            <p class="profile-bio">Building amazing things on the internet. Let's connect and collaborate!</p>
+        </div>
 
-    // ===== EASTER EGG: KONAMI CODE =====
-    let konamiCode = [];
-    const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-    
-    document.addEventListener('keydown', (e) => {
-        konamiCode.push(e.key);
-        konamiCode = konamiCode.slice(-konamiSequence.length);
-        
-        if (konamiCode.join('') === konamiSequence.join('')) {
-            activateEasterEgg();
-        }
-    });
+        <!-- Social Links -->
+        <div class="links-container">
+            <!-- GitHub -->
+            <a href="https://github.com/Rafid34" class="link-card" target="_blank" rel="noopener noreferrer">
+                <div class="link-icon">
+                    <i class="fab fa-github"></i>
+                </div>
+                <div class="link-content">
+                    <h3 class="link-title">GitHub</h3>
+                    <p class="link-subtitle">Check out my projects and code</p>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
 
-    function activateEasterEgg() {
-        document.body.style.animation = 'rainbow 2s linear infinite';
-        setTimeout(() => {
-            document.body.style.animation = '';
-        }, 5000);
-    }
-});
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/in/your-profile" class="link-card" target="_blank" rel="noopener noreferrer">
+                <div class="link-icon linkedin">
+                    <i class="fab fa-linkedin-in"></i>
+                </div>
+                <div class="link-content">
+                    <h3 class="link-title">LinkedIn</h3>
+                    <p class="link-subtitle">Let's connect professionally</p>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
 
-// ===== CSS FOR RIPPLE EFFECT =====
-const style = document.createElement('style');
-style.textContent = `
-    .link-card {
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
-        transform: scale(0);
-        animation: ripple-animation 0.6s ease-out;
-        pointer-events: none;
-    }
-    
-    @keyframes ripple-animation {
-        to {
-            transform: scale(2);
-            opacity: 0;
-        }
-    }
-    
-    @keyframes rainbow {
-        0% { filter: hue-rotate(0deg); }
-        100% { filter: hue-rotate(360deg); }
-    }
-`;
-document.head.appendChild(style);
+            <!-- Twitter/X -->
+            <a href="https://twitter.com/your-handle" class="link-card" target="_blank" rel="noopener noreferrer">
+                <div class="link-icon twitter">
+                    <i class="fab fa-x-twitter"></i>
+                </div>
+                <div class="link-content">
+                    <h3 class="link-title">Twitter / X</h3>
+                    <p class="link-subtitle">Follow me for updates</p>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/your-username" class="link-card" target="_blank" rel="noopener noreferrer">
+                <div class="link-icon instagram">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div class="link-content">
+                    <h3 class="link-title">Instagram</h3>
+                    <p class="link-subtitle">See my visual stories</p>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Portfolio -->
+            <a href="https://your-portfolio.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                <div class="link-icon portfolio">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="link-content">
+                    <h3 class="link-title">Portfolio</h3>
+                    <p class="link-subtitle">Explore my work and projects</p>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://youtube.com/@your-channel" class="link-card" target="_blank" rel="noopener noreferrer">
+                <div class="link-icon youtube">
+                    <i class="fab fa-youtube"></i>
+                </div>
+                <div class="link-content">
+                    <h3 class="link-title">YouTube</h3>
+                    <p class="link-subtitle">Subscribe to my channel</p>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:your.email@example.com" class="link-card">
+                <div class="link-icon email">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="link-content">
+                    <h3 class="link-title">Email Me</h3>
+                    <p class="link-subtitle">Get in touch via email</p>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Discord -->
+            <a href="https://discord.gg/your-invite" class="link-card" target="_blank" rel="noopener noreferrer">
+                <div class="link-icon discord">
+                    <i class="fab fa-discord"></i>
+                </div>
+                <div class="link-content">
+                    <h3 class="link-title">Discord</h3>
+                    <p class="link-subtitle">Join my community</p>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2026 Ahnaf Aqif Bhuiyan Rafid. All rights reserved.</p>
+            <p class="footer-subtitle">Made with <i class="fas fa-heart"></i> using HTML, CSS & JavaScript</p>
+        </div>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
