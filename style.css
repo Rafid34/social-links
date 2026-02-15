@@ -219,7 +219,8 @@ body::before {
 .link-icon.youtube { background: linear-gradient(135deg, #ff0000, #cc0000); }
 .link-icon.email { background: linear-gradient(135deg, #ea4335, #c5221f); }
 .link-icon.discord { background: linear-gradient(135deg, #5865f2, #4752c4); }
-
+.link-icon.snapchat { background: linear-gradient(135deg, #c2c03a, #ffeb3b); }  
+.link-icon.facebook { background: linear-gradient(135deg, #1877f2, #0d47a1); }  
 /* ===== LINK CONTENT ===== */
 .link-content {
     flex: 1;
